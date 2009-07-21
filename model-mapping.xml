@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- example of what we want in the new mapping file (see http://idp.atlantides.org/trac/idp/wiki/MapMaker ). For each
+    entry in this file, we want all the appropriate following information:
+    
+    * TM no.
+    * HGV no.
+    * HGV translation ID
+    * DDbDP unique ID (Perseus style, e.g. 0001;1;1)
+    * DDbDP unique ID (Human readable style, e.g. bgu;1;1)
+    * DDbDP Reprint In information (Human readable style, e.g. p.louvre;1;4)
+    * DDbDP Reprint From information (Human readable style, e.g. bgu;1;1)
+    * APIS URL
+    * Andere Publ. 
+
+-->
+<maps>
+    <map>
+        
+    </map>
+</maps>
