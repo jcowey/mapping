@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- example of what we want in the new mapping file (see http://idp.atlantides.org/trac/idp/wiki/MapMaker ). For each
-    entry in this file, we want all the appropriate following information:
-    
-    * TM no.
-    * HGV no.
-    * HGV translation ID
-    * DDbDP unique ID (Perseus style, e.g. 0001;1;1)
-    * DDbDP unique ID (Human readable style, e.g. bgu;1;1)
-    * DDbDP Reprint In information (Human readable style, e.g. p.louvre;1;4)
-    * DDbDP Reprint From information (Human readable style, e.g. bgu;1;1)
-    * APIS URL
-    * Andere Publ. 
-
--->
+<!-- example of what we want in the new mapping file (see http://idp.atlantides.org/trac/idp/wiki/MapMaker ).  -->
 <maps>
     <map>
-        
+        <ddbdp_hybrid>p.louvre;1;4</ddbdp_hybrid>
+        <ddpdp_perseus>0263;1;4</ddpdp_perseus>
+        <ddbdp_readable>p.louvre.1.4</ddbdp_readable>
+        <associated_hgv>11853</associated_hgv>
+        <reprint_from>bgu;1;1</reprint_from>
+        <reprint_from>bgu;1;337</reprint_from>
+        <reprint_from>chr.wilck;;92</reprint_from>
+        <tm>11853</tm>
+        <hgv>hgv11853</hgv>
+        <div type="bibliography" subtype="otherPublications">
+            <head>Andere Publikationen</head>
+            <listBibl>
+                <bibl type="publication" subtype="other">Kol. I: BGU I 337</bibl>
+                <bibl type="publication" subtype="other">Kol. II: BGU I 1</bibl>
+                <bibl type="publication" subtype="other">W.Chr. 92 (Kol. I + II)</bibl>
+            </listBibl>
+        </div>
+    </map>
+    
+    <map>
+        <ddbdp_hybrid>bgu;1;1</ddbdp_hybrid>
+        <ddbdp_perseus>0001;1;1</ddbdp_perseus>
+        <ddbdp_readable>bgu.1.1</ddbdp_readable>
+        <associated_hgv>11853</associated_hgv>
+        <reprint_in>p.louvre;1;4</reprint_in>
+    </map>
+    
+    <map>
+        <ddbdp_hybrid>bgu;1;100</ddbdp_hybrid>
+        <ddbdp_perseus>0001;1;100</ddbdp_perseus>
+        <ddbdp_readable>bgu.1.100</ddbdp_readable>
+        <associated_hgv>8875</associated_hgv>
+        <tm>8875</tm>
+        <hgv>hgv8875</hgv>
+        <trans>HGV-8875</trans>
+    </map>
+    
+    <map>
+        <ddbdp_hybrid>p.mich;10;585</ddbdp_hybrid>
+        <ddbdp_perseus>0163;10;585</ddbdp_perseus>
+        <ddbdp_readable>p.mich.10.585</ddbdp_readable>
+        <associated_hgv>12272</associated_hgv>
+        <tm>12272</tm>
+        <hgv>hgv12272</hgv>
+        <trans>HGV-8875</trans>
+        <!-- note escaped ampersand in following URL -->
+        <apis>http://wwwapp.cc.columbia.edu/ldpd/app/apis/item?mode=item&amp;key=michigan.apis.1301</apis>
     </map>
 </maps>
