@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- example of what we want in the new mapping file (see http://idp.atlantides.org/trac/idp/wiki/MapMaker ).  -->
-<maps>
+<maps
+    xmlns=""
+    xmlns:tei="http://www.tei-c.org/ns/1.0/">
     <map>
         <!-- generated hybrid from other data in file -->
         <ddbdp_hybrid>p.louvre;1;4</ddbdp_hybrid>
@@ -13,14 +15,14 @@
         <tm>11853</tm>
         <!-- parse 11853 from hgv11853 as found in file -->
         <hgv>11853</hgv>
-        <div type="bibliography" subtype="otherPublications">
-            <head>Andere Publikationen</head>
-            <listBibl>
-                <bibl type="publication" subtype="other">Kol. I: BGU I 337</bibl>
-                <bibl type="publication" subtype="other">Kol. II: BGU I 1</bibl>
-                <bibl type="publication" subtype="other">W.Chr. 92 (Kol. I + II)</bibl>
-            </listBibl>
-        </div>
+        <tei:div type="bibliography" subtype="otherPublications">
+            <tei:head>Andere Publikationen</tei:head>
+            <tei:listBibl>
+                <tei:bibl type="publication" subtype="other">Kol. I: BGU I 337</tei:bibl>
+                <tei:bibl type="publication" subtype="other">Kol. II: BGU I 1</tei:bibl>
+                <tei:bibl type="publication" subtype="other">W.Chr. 92 (Kol. I + II)</tei:bibl>
+            </tei:listBibl>
+        </tei:div>
     </map>
     
     <map>
