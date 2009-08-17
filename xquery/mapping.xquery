@@ -9,7 +9,7 @@ declare variable $hgvtColl := collection('../../../idp.data/trunk/HGV_trans_EpiD
     {
     
     (: Creates an entry for every single DDB XML file:)
-    for $file in collection('../../../idp.data/branches/p5-test/DDB_EpiDoc_XML/bgu/?recurse=yes;select=*.xml')
+    for $file in collection('../../../idp.data/branches/p5-test/?recurse=yes;select=*.xml')
         let $teiHeader := $file//tei:teiHeader
         let $fileid := $teiHeader//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()
         let $associatedHGVString := $teiHeader//tei:titleStmt/tei:title/@n
