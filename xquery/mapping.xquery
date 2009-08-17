@@ -2,11 +2,14 @@
 xquery version "1.0";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace tei2="http://www.stoa.org/epidoc/dtd/6/tei-epidoc.dtd";
+declare variable $hgvColl := collection('../../../idp.data/trunk/HGV_meta_EpiDoc/?recurse=yes;select=*.xml');
+declare variable $hgvtColl := collection('../../../idp.data/trunk/HGV_trans_EpiDoc/?recurse=yes;select=*.xml');
 
 <maps>
     {
+    
     (: Creates an entry for every single DDB XML file:)
-    for $file in collection('../../../idp.data/branches/p5-test/?recurse=yes;select=*.xml')
+    for $file in collection('../../../idp.data/branches/p5-test/DDB_EpiDoc_XML/bgu/?recurse=yes;select=*.xml')
         let $teiHeader := $file//tei:teiHeader
         let $fileid := $teiHeader//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()
         let $associatedHGVString := $teiHeader//tei:titleStmt/tei:title/@n
@@ -41,7 +44,7 @@ declare namespace tei2="http://www.stoa.org/epidoc/dtd/6/tei-epidoc.dtd";
             }
             {
             (: Pulls information from HGV metadata files that match the DDB file :)
-                for $HGVfile in collection('../../../idp.data/trunk/HGV_meta_EpiDoc/?recurse=yes;select=*.xml')/TEI.2[@n = $fileid]
+                for $HGVfile in $hgvColl/TEI.2[@n = $fileid]
                     let $hgv := $HGVfile/@id
                     return
                     (
@@ -63,7 +66,7 @@ declare namespace tei2="http://www.stoa.org/epidoc/dtd/6/tei-epidoc.dtd";
             }
             {
             (: Pulls HGV translation file ID that matches the DDB file :)
-                for $HGVtrans in collection('../../../idp.data/trunk/HGV_trans_EpiDoc/?recurse=yes;select=*.xml')/TEI.2[@n = $fileid]
+                for $HGVtrans in $hgvtColl/TEI.2[@n = $fileid]
                     return
                         <trans>{string($HGVtrans/@id)}</trans>
             }
@@ -73,7 +76,7 @@ declare namespace tei2="http://www.stoa.org/epidoc/dtd/6/tei-epidoc.dtd";
     {
     (: Creates a stub entry for all remaining HGV files:)
         let $DDBCollection := collection('../../../idp.data/branches/p5-test/?recurse=yes;select=*.xml')//tei:TEI//tei:teiHeader//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()
-        for $HGVStub in collection('../../../idp.data/trunk/HGV_meta_EpiDoc/?recurse=yes;select=*.xml')/TEI.2[not(@n = $DDBCollection)]
+        for $HGVStub in $hgvColl/TEI.2[not(@n = $DDBCollection)]
         let $name := document-uri($HGVStub/..)
         let $HGVidno := substring-after($HGVStub/@id, 'hgv')
             return
