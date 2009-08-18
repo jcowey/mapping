@@ -4,14 +4,17 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace tei2="http://www.stoa.org/epidoc/dtd/6/tei-epidoc.dtd";
 declare variable $hgvColl := collection('../../../idp.data/trunk/HGV_meta_EpiDoc/?recurse=yes;select=*.xml');
 declare variable $hgvtColl := collection('../../../idp.data/trunk/HGV_trans_EpiDoc/?recurse=yes;select=*.xml');
+declare variable $ddbUrl := "../../../idp.data/branches/p5-test/DDB_EpiDoc_XML/?recurse=yes;select=*.xml";
+declare variable $ddbIds := ();
 
 <maps>
     {
     
     (: Creates an entry for every single DDB XML file:)
-    for $file in collection('../../../idp.data/branches/p5-test/?recurse=yes;select=*.xml')
+    for $file in collection($ddbUrl)
         let $teiHeader := $file//tei:teiHeader
         let $fileid := $teiHeader//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()
+        let $ddbIds := distinct-values(($ddbIds, $fileid))
         let $associatedHGVString := $teiHeader//tei:titleStmt/tei:title/@n
         let $teiText := $file//tei:text
         return
@@ -58,10 +61,9 @@ declare variable $hgvtColl := collection('../../../idp.data/trunk/HGV_trans_EpiD
                             <anderePubl>{$otherBibl/text()}</anderePubl>
                         else string(''),
                         (: APIS image :)
-                        if (exists($HGVfile//text/body/div[@type='figure']//figure[starts-with(@href, 'http://wwwapp.cc.columbia.edu')]))
-                        then
-                            <apis>{substring-after($HGVfile//text/body/div[@type='figure']//figure[starts-with(@href, 'http://wwwapp.cc.columbia.edu')]/@href, 'key=')}</apis>
-                        else string('')
+                        for $figure in $HGVfile/text/body/div[@type='figure']//figure[starts-with(@href, 'http://wwwapp.cc.columbia.edu')]
+                        return
+                            <apis>{substring-after($figure/@href, 'key=')}</apis>
                     )
             }
             {
@@ -71,45 +73,5 @@ declare variable $hgvtColl := collection('../../../idp.data/trunk/HGV_trans_EpiD
                         <trans>{string($HGVtrans/@id)}</trans>
             }
         </map>
-    }
-
-    {
-    (: Creates a stub entry for all remaining HGV files:)
-        let $DDBCollection := collection('../../../idp.data/branches/p5-test/?recurse=yes;select=*.xml')//tei:TEI//tei:teiHeader//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()
-        for $HGVStub in $hgvColl/TEI.2[not(@n = $DDBCollection)]
-        let $name := document-uri($HGVStub/..)
-        let $HGVidno := substring-after($HGVStub/@id, 'hgv')
-            return
-                <map>
-                    <tm>{$HGVStub//text/body/div/listBibl/bibl[@type='Trismegistos']/biblScope/text()}</tm>
-                    <hgv>{$HGVidno}</hgv>
-                    {
-                    (: Publication :)
-                        if (exists($HGVStub/text/body/div[@type='bibliography'][@subtype='otherPublications']))
-                        then
-                            $HGVStub/text/body/div[@type='bibliography'][@subtype='otherPublications']
-                        else string('')
-                    }
-                    {
-                    (: APIS image :)
-                        if (exists($HGVStub/text/body/div[@type='figure']//figure[starts-with(@href, 'http://wwwapp.cc.columbia.edu')]))
-                        then
-                            <apis>{substring-after($HGVStub/text/body/div[@type='figure']//figure[starts-with(@href, 'http://wwwapp.cc.columbia.edu')]/@href, 'key=')}</apis>
-                        else string('')
-                    }
-                    <error>No DDB match</error>        
-                    {
-                    if (not(ends-with(substring-before($name, '.xml'), $HGVidno)))
-                    then
-                        <error>Filename does not match @id: {$name}</error>
-                    else string('')
-                    }    
-                    {
-                    if (ends-with($HGVStub/@n, ';') or starts-with($HGVStub/@n, ';'))
-                    then
-                        <error>Check DDB reference @n: {string($HGVStub/@n)}</error>
-                    else string('')
-                    }
-                </map>
     }
 </maps>
