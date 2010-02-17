@@ -11,40 +11,42 @@
     
     <xsl:template match="/tei:TEI">
         <xsl:variable name="id">http://papyri.info/apis/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'apisid']/text()"/>/source</xsl:variable>
-        <rdf:RDF>
-            <rdf:Description rdf:about="{$id}">
-                <dcterms:identifier>papyri.info/apis/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'apisid']/text()"/></dcterms:identifier>
-                <dcterms:identifier><xsl:value-of select="//tei:sourceDesc/tei:msDesc/tei:msIdentifier/tei:idno"/></dcterms:identifier>
-                <dcterms:isPartOf rdf:resource="http://papyri.info/apis/{substring-before(//tei:publicationStmt/tei:idno[@type = 'apisid'], '.')}"/>
-                <xsl:for-each select="//tei:bibl[@type = 'ddbdp']">
-                    <xsl:variable name="ddb-seq" select=" tokenize(., ':')"/>
-                    <xsl:variable name="col" select="replace(lower-case($ddb-seq[1]),'\.$','')"/>
-                    <xsl:variable name="ddb-doc-uri">
-                        <xsl:choose>
-                            <xsl:when test="count($ddb-seq) = 2"><xsl:value-of select="concat($DDB-root, '/', $col, '/', $col, '.', $ddb-seq[2], '.xml')"/></xsl:when>
-                            <xsl:when test="count($ddb-seq) = 3"><xsl:value-of select="concat($DDB-root, '/', $col, '/', $col, '.', $ddb-seq[2], '/', $col, '.', $ddb-seq[2], '.', $ddb-seq[3], '.xml')"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <xsl:variable name="ddb-doc">
-                        <xsl:if test="doc-available($ddb-doc-uri)"><xsl:copy-of select="document($ddb-doc-uri)"/></xsl:if>
-                    </xsl:variable>
-                    <xsl:if test="$ddb-doc != ''">
+        <rdf:Description rdf:about="{$id}">
+            <dcterms:identifier>papyri.info/apis/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'apisid']/text()"/></dcterms:identifier>
+            <dcterms:identifier><xsl:value-of select="//tei:sourceDesc/tei:msDesc/tei:msIdentifier/tei:idno"/></dcterms:identifier>
+            <dcterms:isPartOf>
+                <rdf:Description rdf:about="http://papyri.info/apis/{substring-before(//tei:publicationStmt/tei:idno[@type = 'apisid'], '.')}">
+                    <dcterms:isPartOf rdf:resource="http://papyri.info/apis"/>
+                </rdf:Description>
+            </dcterms:isPartOf>
+            <xsl:for-each select="//tei:bibl[@type = 'ddbdp']">
+                <xsl:variable name="ddb-seq" select=" tokenize(., ':')"/>
+                <xsl:variable name="col" select="replace(lower-case($ddb-seq[1]),'\.$','')"/>
+                <xsl:variable name="ddb-doc-uri">
+                    <xsl:choose>
+                        <xsl:when test="count($ddb-seq) = 2"><xsl:value-of select="concat($DDB-root, '/', $col, '/', $col, '.', $ddb-seq[2], '.xml')"/></xsl:when>
+                        <xsl:when test="count($ddb-seq) = 3"><xsl:value-of select="concat($DDB-root, '/', $col, '/', $col, '.', $ddb-seq[2], '/', $col, '.', $ddb-seq[2], '.', $ddb-seq[3], '.xml')"/></xsl:when>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="ddb-doc">
+                    <xsl:if test="doc-available($ddb-doc-uri)"><xsl:copy-of select="document($ddb-doc-uri)"/></xsl:if>
+                </xsl:variable>
+                <xsl:if test="$ddb-doc != ''">
+                    <dcterms:relation>
+                        <rdf:Description rdf:about="http://papyri.info/ddbdp/{$ddb-doc//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()}/source">
+                            <dcterms:relation rdf:resource="{$id}"/>
+                        </rdf:Description>
+                    </dcterms:relation>
+                    <xsl:for-each select="tokenize($ddb-doc//tei:titleStmt/tei:title/@n, '\s')">
                         <dcterms:relation>
-                            <rdf:Description rdf:about="http://papyri.info/ddbdp/{$ddb-doc//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()}/source">
+                            <rdf:Description rdf:about="http://papyri.info/hgv/{.}">
                                 <dcterms:relation rdf:resource="{$id}"/>
                             </rdf:Description>
                         </dcterms:relation>
-                        <xsl:for-each select="tokenize($ddb-doc//tei:titleStmt/tei:title/@n, '\s')">
-                            <dcterms:relation>
-                                <rdf:Description rdf:about="http://papyri.info/hgv/{.}">
-                                    <dcterms:relation rdf:resource="{$id}"/>
-                                </rdf:Description>
-                            </dcterms:relation>
-                        </xsl:for-each>
-                    </xsl:if>
-                </xsl:for-each>
-            </rdf:Description>
-        </rdf:RDF>
+                    </xsl:for-each>
+                </xsl:if>
+            </xsl:for-each>
+        </rdf:Description>
     </xsl:template>
     
 </xsl:stylesheet>
