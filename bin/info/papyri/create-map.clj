@@ -67,9 +67,6 @@
             compiler-info (CompilerInfo.)]
           (doto xsl-src 
             (.setSystemId xslt))
-          (doto configuration
-            (.setURIResolver (CatalogResolver.))
-            (.setConfigurationProperty FeatureKeys/SOURCE_PARSER_CLASS "org.apache.xml.resolver.tools.ResolvingXMLReader"))
           (doto compiler-info
             (.setErrorListener (StandardErrorListener.))
             (.setURIResolver (StandardURIResolver. configuration)))
