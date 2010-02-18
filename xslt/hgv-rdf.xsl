@@ -11,7 +11,7 @@
     <xsl:template match="/tei:TEI">
         <xsl:variable name="id">http://papyri.info/hgv/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type='filename']"/>/source</xsl:variable>
         <xsl:variable name="bibl" select="//tei:div[@type='bibliography']//tei:bibl[@type='publication' and @subtype='principal']"/>
-        <xsl:variable name="title" select="encode-for-uri($bibl/tei:title[@level='s'])"/>
+        <xsl:variable name="title" select="replace($bibl/tei:title[@level='s'],'\s','_')"/>
         <xsl:variable name="refid" select="generate-id()"/>
         <rdf:Description rdf:about="{$id}">
             <dcterms:identifier>papyri.info/hgv/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type='filename']"/></dcterms:identifier>
@@ -21,7 +21,7 @@
             <dcterms:isPartOf>
                 <xsl:choose>
                     <xsl:when test="$bibl//tei:biblScope[@type='volume']">
-                        <rdf:Description rdf:about="http://papyri.info/hgv/{$title}%20{normalize-space($bibl//tei:biblScope[@type='volume'])}">
+                        <rdf:Description rdf:about="http://papyri.info/hgv/{$title}_{normalize-space($bibl//tei:biblScope[@type='volume'])}">
                             <dcterms:isPartOf>
                                 <rdf:Description rdf:about="http://papyri.info/hgv/{$title}">
                                     <dcterms:isPartOf rdf:resource="http://papyri.info/hgv"/>
