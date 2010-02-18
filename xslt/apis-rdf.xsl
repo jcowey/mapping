@@ -39,7 +39,7 @@
                     </dcterms:relation>
                     <xsl:for-each select="tokenize($ddb-doc//tei:titleStmt/tei:title/@n, '\s')">
                         <dcterms:relation>
-                            <rdf:Description rdf:about="http://papyri.info/hgv/{.}">
+                            <rdf:Description rdf:about="http://papyri.info/hgv/{.}/source">
                                 <dcterms:relation rdf:resource="{$id}"/>
                             </rdf:Description>
                         </dcterms:relation>
