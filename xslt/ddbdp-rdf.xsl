@@ -9,8 +9,8 @@
     <xsl:output omit-xml-declaration="yes"/>
     
     <xsl:template match="/tei:TEI">
-        <xsl:variable name="id">http://papyri.info/ddbdp/<xsl:value-of select="normalize-space(//tei:publicationStmt/tei:idno[@type='ddb-hybrid'])"/>/source</xsl:variable>
-        <xsl:variable name="ddb-seq" select="tokenize(//tei:publicationStmt/tei:idno[@type='ddb-hybrid'], ';')"/>
+        <xsl:variable name="ddb-seq" select="tokenize(normalize-space(//tei:publicationStmt/tei:idno[@type='ddb-hybrid']), ';')"/>
+        <xsl:variable name="id">http://papyri.info/ddbdp/<xsl:value-of select="$ddb-seq[1]"/>;<xsl:value-of select="$ddb-seq[2]"/>;<xsl:value-of select="encode-for-uri($ddb-seq[3])"/>/source</xsl:variable>
         <xsl:variable name="tmids" select="distinct-values(tokenize(replace(//tei:titleStmt/tei:title/@n, '[a-z]', ''), '\s'))"/>
         <rdf:Description rdf:about="{$id}">
             <dcterms:identifier>papyri.info/ddbdp/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()"/></dcterms:identifier>

@@ -11,7 +11,7 @@
     <xsl:template match="/tei:TEI">
         <xsl:variable name="id">http://papyri.info/hgv/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type='filename']"/>/source</xsl:variable>
         <xsl:variable name="bibl" select="//tei:div[@type='bibliography']//tei:bibl[@type='publication' and @subtype='principal']"/>
-        <xsl:variable name="title" select="replace($bibl/tei:title[@level='s'],'\s','_')"/>
+        <xsl:variable name="title" select="replace(normalize-unicode(replace($bibl/tei:title[@level='s'],'\s','_'), 'NFD'), '[^._a-zA-Z]', '')"/>
         <xsl:variable name="refid" select="generate-id()"/>
         <rdf:Description rdf:about="{$id}">
             <dcterms:identifier>papyri.info/hgv/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type='filename']"/></dcterms:identifier>
