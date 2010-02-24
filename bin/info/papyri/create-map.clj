@@ -10,7 +10,6 @@
            (javax.xml.transform.stream StreamSource StreamResult)
            (net.sf.saxon Configuration FeatureKeys PreparedStylesheet StandardErrorListener StandardURIResolver TransformerFactoryImpl)
            (net.sf.saxon.trans CompilerInfo XPathException)
-           (org.apache.xml.resolver.tools CatalogResolver ResolvingXMLReader)
            (org.mulgara.connection Connection ConnectionFactory)
            (org.mulgara.query.operation Command CreateGraph Load)))
            
