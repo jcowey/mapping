@@ -17,6 +17,12 @@
             <xsl:for-each select="//tei:publicationStmt/tei:idno[@type='TM']">
                 <dcterms:identifier>tm:<xsl:value-of select="."/></dcterms:identifier>
             </xsl:for-each>
+            <dcterms:identifier>
+                <rdf:Description>
+                    <xsl:attribute name="rdf:about">http://papyri.info/hgv/<xsl:value-of select="$title"/><xsl:if test="$bibl//tei:biblScope[@type='volume']">_<xsl:value-of select="$bibl//tei:biblScope[@type='volume']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">_<xsl:value-of select="$bibl//tei:biblScope[@type='numbers']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='parts']">_<xsl:value-of select="$bibl//tei:biblScope[@type='parts']"/></xsl:if></xsl:attribute>
+                    <dcterms:identifier rdf:resource="{$id}"/>
+                </rdf:Description>
+            </dcterms:identifier>
             <dcterms:isPartOf>
                 <xsl:choose>
                     <xsl:when test="$bibl//tei:biblScope[@type='volume']">
@@ -50,11 +56,13 @@
                     </rdf:Description>
                 </dcterms:relation>
             </xsl:for-each>
-            <dcterms:source rdf:parseType="Resource">
-                <dcterms:bibliographicCitation><xsl:value-of select="$bibl/tei:title[@level='s']"/><xsl:if test="$bibl//tei:biblScope[@type='volume']"><xsl:text> </xsl:text><xsl:value-of select="$bibl//tei:biblScope[@type='volume']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">, <xsl:value-of select="$bibl//tei:biblScope[@type='numbers']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='parts']">, <xsl:value-of select="$bibl//tei:biblScope[@type='parts']"/></xsl:if></dcterms:bibliographicCitation>
+            <dcterms:source>
+                <rdf:Description rdf:about="http://papyri.info/hgv/{//tei:publicationStmt/tei:idno[@type='filename']}/frbr:Work">
+                    <dcterms:bibliographicCitation><xsl:value-of select="$bibl/tei:title[@level='s']"/><xsl:if test="$bibl//tei:biblScope[@type='volume']"><xsl:text> </xsl:text><xsl:value-of select="$bibl//tei:biblScope[@type='volume']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">, <xsl:value-of select="$bibl//tei:biblScope[@type='numbers']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='parts']">, <xsl:value-of select="$bibl//tei:biblScope[@type='parts']"/></xsl:if></dcterms:bibliographicCitation>
                 <xsl:for-each select="//tei:text/tei:body//tei:bibl[@type='publication'][@subtype='other']">
                     <dcterms:relation><xsl:value-of select="."/></dcterms:relation>
                 </xsl:for-each>
+                </rdf:Description>
             </dcterms:source>
         </rdf:Description>
     </xsl:template>
