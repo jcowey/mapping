@@ -19,7 +19,7 @@
             </xsl:for-each>
             <dcterms:identifier>
                 <rdf:Description>
-                    <xsl:attribute name="rdf:about">http://papyri.info/hgv/<xsl:value-of select="$title"/><xsl:if test="$bibl//tei:biblScope[@type='volume']">_<xsl:value-of select="$bibl//tei:biblScope[@type='volume']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">_<xsl:value-of select="$bibl//tei:biblScope[@type='numbers']"/></xsl:if><xsl:for-each select="$bibl//tei:biblScope[@type='parts']">_<xsl:value-of select="encode-for-uri(.)"/></xsl:for-each></xsl:attribute>
+                    <xsl:attribute name="rdf:about">http://papyri.info/hgv/<xsl:value-of select="$title"/><xsl:if test="$bibl//tei:biblScope[@type='volume']">_<xsl:value-of select="$bibl//tei:biblScope[@type='volume']"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">_<xsl:value-of select="normalize-space($bibl//tei:biblScope[@type='numbers'])"/></xsl:if><xsl:for-each select="$bibl//tei:biblScope[@type='parts']">_<xsl:value-of select="encode-for-uri(normalize-space(.))"/></xsl:for-each></xsl:attribute>
                     <dcterms:identifier rdf:resource="{$id}"/>
                 </rdf:Description>
             </dcterms:identifier>
