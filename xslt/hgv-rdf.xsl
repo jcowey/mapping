@@ -20,12 +20,12 @@
             </xsl:for-each>
             <dcterms:identifier>
                 <rdf:Description>
-                    <xsl:attribute name="rdf:about">http://papyri.info/hgv/<xsl:value-of select="$title"/><xsl:if test="$bibl//tei:biblScope[@type='volume']">_<xsl:value-of select="normalize-space($bibl//tei:biblScope[@type='volume'])"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">_<xsl:value-of select="normalize-space($bibl//tei:biblScope[@type='numbers'])"/></xsl:if><xsl:for-each select="$bibl//tei:biblScope[@type='parts']">_<xsl:value-of select="encode-for-uri(normalize-space(.))"/></xsl:for-each></xsl:attribute>
+                    <xsl:attribute name="rdf:about">http://papyri.info/hgv/<xsl:value-of select="$title"/><xsl:if test="$bibl//tei:biblScope[@type='volume'][not(matches(., '\s+'))]">_<xsl:value-of select="normalize-space($bibl//tei:biblScope[@type='volume'])"/></xsl:if><xsl:if test="$bibl//tei:biblScope[@type='numbers']">_<xsl:value-of select="normalize-space($bibl//tei:biblScope[@type='numbers'])"/></xsl:if><xsl:for-each select="$bibl//tei:biblScope[@type='parts']">_<xsl:value-of select="encode-for-uri(normalize-space(.))"/></xsl:for-each></xsl:attribute>
                     <dcterms:identifier rdf:resource="{$id}"/>
                 </rdf:Description>
             </dcterms:identifier>
             <dcterms:references>
-                <xsl:attribute name="rdf:resource">http://papyri.info/navigator/full/hgv_<xsl:value-of select="encode-for-uri($bibl/tei:title[@level='s'])"/>_<xsl:value-of select="$bibl//tei:biblScope[@type='volume']"/>:<xsl:value-of select="encode-for-uri($bibl//tei:biblScope[@type='numbers'])"/><xsl:for-each select="$bibl//tei:biblScope[@type='parts']">:<xsl:value-of select="replace(encode-for-uri(.), '%', '%25')"/></xsl:for-each></xsl:attribute>
+                <xsl:attribute name="rdf:resource">http://papyri.info/navigator/full/hgv_<xsl:value-of select="encode-for-uri($bibl/tei:title[@level='s'])"/>_<xsl:value-of select="$bibl//tei:biblScope[@type='volume'][not(matches(., '\s+'))]"/>:<xsl:value-of select="encode-for-uri($bibl//tei:biblScope[@type='numbers'])"/><xsl:for-each select="$bibl//tei:biblScope[@type='parts']">:<xsl:value-of select="replace(encode-for-uri(.), '%', '%25')"/></xsl:for-each></xsl:attribute>
             </dcterms:references>
             <dcterms:isPartOf>
                 <xsl:choose>
