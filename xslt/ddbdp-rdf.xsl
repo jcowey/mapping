@@ -11,7 +11,6 @@
     <xsl:template match="/tei:TEI">
         <xsl:variable name="ddb-seq" select="tokenize(normalize-space(//tei:publicationStmt/tei:idno[@type='ddb-hybrid']), ';')"/>
         <xsl:variable name="id">http://papyri.info/ddbdp/<xsl:value-of select="replace(normalize-unicode($ddb-seq[1], 'NFD'), '[^.a-z0-9]', '')"/>;<xsl:value-of select="$ddb-seq[2]"/>;<xsl:value-of select="encode-for-uri($ddb-seq[3])"/>/source</xsl:variable>
-        <xsl:variable name="tmids" select="distinct-values(tokenize(replace(//tei:titleStmt/tei:title/@n, '[a-z]', ''), '\s'))"/>
         <xsl:variable name="perseus-id" select="//tei:publicationStmt/tei:idno[@type = 'ddb-perseus-style']"/>
         <rdf:Description rdf:about="{$id}">
             <dcterms:identifier>papyri.info/ddbdp/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()"/></dcterms:identifier>
@@ -51,16 +50,12 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </dcterms:isPartOf>
-            <xsl:for-each select="tokenize(//tei:titleStmt/tei:title/@n, '\s')">
-                <dcterms:relation>
-                    <rdf:Description rdf:about="http://papyri.info/hgv/{.}/source">
-                        <dcterms:relation rdf:resource="{$id}"/>
-                        <xsl:for-each select="$tmids">
-                            <dcterms:identifier>tm:<xsl:value-of select="."/></dcterms:identifier>
-                        </xsl:for-each>
-                    </rdf:Description>
-                </dcterms:relation>
+            <xsl:for-each select="//tei:idno[@type = 'HGV']">
+              <dcterms:relation rdf:resource="http://papyri.info/hgv/{.}/source"/>
             </xsl:for-each>
+          <xsl:for-each select="//tei:idno[@type = 'TM']">
+            <dcterms:relation rdf:resource="http://www.trismegistos.org/tm/detail.php?quick={.}"/>
+          </xsl:for-each>
         </rdf:Description>
     </xsl:template>
 </xsl:stylesheet>
