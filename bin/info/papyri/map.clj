@@ -97,5 +97,5 @@
     (flush-buffer (count @buffer)))
 
       
-(-main (rest *command-line-args*))
+(-main *command-line-args*)
   

@@ -18,6 +18,6 @@
       (.execute (Load. (.toURI file) graph, true) conn)
       (.close conn)))
       
-(-main (rest *command-line-args*))
+(-main *command-line-args*)
            
          

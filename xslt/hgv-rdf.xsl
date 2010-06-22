@@ -37,7 +37,7 @@
             </dcterms:references>
             <dcterms:isPartOf>
                 <xsl:choose>
-                    <xsl:when test="$bibl//tei:biblScope[@type='volume']">
+                  <xsl:when test="$bibl//tei:biblScope[@type='volume'][not(matches(., '\s+'))]">
                         <rdf:Description rdf:about="http://papyri.info/hgv/{$title}_{normalize-space($bibl//tei:biblScope[@type='volume'])}">
                             <dcterms:isPartOf>
                                 <rdf:Description rdf:about="http://papyri.info/hgv/{$title}">

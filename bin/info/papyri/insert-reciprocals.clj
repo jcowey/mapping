@@ -13,16 +13,20 @@
            
 (defn -main
   [args]
-  (def insert "prefix dc: <http://purl.org/dc/terms/> 
+  (def hasPart "prefix dc: <http://purl.org/dc/terms/> 
     construct{?s dc:hasPart ?o} 
     from <rmi://localhost/papyri.info#pi> 
     where { ?o dc:isPartOf ?s}")
+  (def relation "  prefix dc: <http://purl.org/dc/terms/> 
+      construct{?s dc:relation ?o} 
+      from <rmi://localhost/papyri.info#pi> 
+      where { ?o dc:relation ?s}")
   (let [factory (ConnectionFactory.)
         conn (.newConnection factory server)
         interpreter (SparqlInterpreter.)]
       (.execute conn (CreateGraph. graph))
-      (.execute (Insertion. graph, (.parseQuery interpreter insert)) conn)
+      (.execute (Insertion. graph, (.parseQuery interpreter hasPart)) conn)
+      (.execute (Insertion. graph, (.parseQuery interpreter relation)) conn)
       (.close conn)))
       
 (-main (rest *command-line-args*))
-           
