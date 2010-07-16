@@ -24,13 +24,14 @@
                 </xsl:if>
             </xsl:for-each>
             </xsl:for-each>
-            
-            <xsl:for-each select="tokenize(//tei:body/tei:head[@xml:lang='en']/tei:ref[@type='reprint-from']/@n, '\|')">
+          <xsl:for-each select="//tei:body/tei:head[@xml:lang='en']/tei:ref[@type='reprint-from']">
+            <xsl:for-each select="tokenize(@n, '\|')">
                 <xsl:variable name="ddb-reprint-seq" select="tokenize(., ';')"/>
                 <xsl:if test="matches(., '(\w|\.);\d*;.+')">    
                     <dcterms:replaces rdf:resource="http://papyri.info/ddbdp/{$ddb-reprint-seq[1]};{$ddb-reprint-seq[2]};{encode-for-uri($ddb-reprint-seq[3])}/source"/>
                 </xsl:if>
             </xsl:for-each>
+          </xsl:for-each>
             <dcterms:isPartOf>
                 <xsl:choose>
                     <xsl:when test="$ddb-seq[2] = ''">
