@@ -55,8 +55,10 @@
               <dcterms:relation rdf:resource="http://papyri.info/hgv/{.}/source"/>
             </xsl:for-each>
           </xsl:for-each>
-          <xsl:for-each select="tokenize(//tei:idno[@type = 'TM'], '\s')">
-            <dcterms:relation rdf:resource="http://www.trismegistos.org/tm/detail.php?quick={.}"/>
+          <xsl:for-each select="//tei:idno[@type = 'TM']">
+            <xsl:for-each select="tokenize(., '\s')">
+              <dcterms:relation rdf:resource="http://www.trismegistos.org/tm/detail.php?quick={.}"/>
+            </xsl:for-each>
           </xsl:for-each>
         </rdf:Description>
     </xsl:template>
