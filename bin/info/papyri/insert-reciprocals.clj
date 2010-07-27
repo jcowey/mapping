@@ -17,10 +17,19 @@
     construct{?s dc:hasPart ?o} 
     from <rmi://localhost/papyri.info#pi> 
     where { ?o dc:isPartOf ?s}")
-  (def relation "  prefix dc: <http://purl.org/dc/terms/> 
+  (def relation "prefix dc: <http://purl.org/dc/terms/> 
       construct{?s dc:relation ?o} 
       from <rmi://localhost/papyri.info#pi> 
       where { ?o dc:relation ?s}")
+  (def translations "prefix dc: <http://purl.org/dc/terms/>
+      construct { ?r1 <http://purl.org/dc/terms/relation> ?r2 }
+      from <rmi://localhost/papyri.info#pi>
+      where {
+      ?i dc:relation ?r1 .
+      ?i dc:relation ?r2 .
+      FILTER  regex(str(?i), \"^http://papyri.info/hgv\") 
+      FILTER  regex(str(?r1), \"^http://papyri.info/ddbdp\")
+      FILTER  regex(str(?r2), \"^http://papyri.info/hgvtrans\")}")
   (def images "prefix dc: <http://purl.org/dc/terms/>
       construct { ?r1 <http://purl.org/dc/terms/relation> ?r2 }
       from <rmi://localhost/papyri.info#pi>
@@ -37,6 +46,7 @@
       (.execute conn (CreateGraph. graph))
       (.execute (Insertion. graph, (.parseQuery interpreter hasPart)) conn)
       (.execute (Insertion. graph, (.parseQuery interpreter relation)) conn)
+      (.execute (Insertion. graph, (.parseQuery interpreter translations)) conn)
       (.execute (Insertion. graph, (.parseQuery interpreter images)) conn)
       (.close conn)))
       

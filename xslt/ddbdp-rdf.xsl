@@ -50,9 +50,11 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </dcterms:isPartOf>
-            <xsl:for-each select="tokenize(//tei:idno[@type = 'HGV'], '\s')">
+          <xsl:for-each select="//tei:idno[@type = 'HGV']">
+            <xsl:for-each select="tokenize(., '\s')">
               <dcterms:relation rdf:resource="http://papyri.info/hgv/{.}/source"/>
             </xsl:for-each>
+          </xsl:for-each>
           <xsl:for-each select="tokenize(//tei:idno[@type = 'TM'], '\s')">
             <dcterms:relation rdf:resource="http://www.trismegistos.org/tm/detail.php?quick={.}"/>
           </xsl:for-each>
