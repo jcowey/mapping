@@ -1,4 +1,6 @@
-; Recursively read a directory full of XML and produce a map file from it, using a provided XSLT
+;; Recursively read a directory full of XML and convert the files therein to RDF, using a provided XSLT.
+;; Then load the RDF data into a triplestore
+
 (ns info.papyri.map
   (:gen-class)
   (:import (java.io BufferedReader ByteArrayInputStream ByteArrayOutputStream File FileInputStream FileOutputStream FileReader StringWriter)
