@@ -1,4 +1,5 @@
-;; Load a local file into the store
+;; Run some queries that infer new relationships based on existing ones
+;; and insert the results into the database.
 (ns info.papyri.map
   (:gen-class)
   (:import (java.io File)
