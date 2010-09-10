@@ -7,6 +7,7 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     exclude-result-prefixes="xs tei" version="2.0">
     <xsl:output omit-xml-declaration="yes"/>
+  <xsl:param name="root"/>
     
     <xsl:template match="/tei:TEI">
         <xsl:variable name="ddb-seq" select="tokenize(normalize-space(//tei:publicationStmt/tei:idno[@type='ddb-hybrid']), ';')"/>
@@ -52,7 +53,10 @@
             </dcterms:isPartOf>
           <xsl:for-each select="//tei:idno[@type = 'HGV']">
             <xsl:for-each select="tokenize(., '\s')">
-              <dcterms:relation rdf:resource="http://papyri.info/hgv/{.}/source"/>
+              <xsl:variable name="dir" select="ceiling(number(replace(., '[a-z]', '')) div 1000)"/>
+              <xsl:if test="doc-available(concat('file://', $root, '/HGV_meta_EpiDoc/HGV', $dir, '/', ., '.xml'))">
+                <dcterms:relation rdf:resource="http://papyri.info/hgv/{.}/source"/>
+              </xsl:if>
             </xsl:for-each>
           </xsl:for-each>
           <xsl:for-each select="//tei:idno[@type = 'TM']">
