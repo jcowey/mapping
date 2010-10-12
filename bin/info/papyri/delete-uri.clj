@@ -1,4 +1,4 @@
-;; Load a local file into the store
+; Load a local file into the store
 (ns info.papyri.map
   (:gen-class)
   (:import (java.io File)
@@ -28,4 +28,4 @@
 	  (.execute (Deletion. graph, (.parseQuery interpreter deleteobj)) conn)
 	  (.close conn))))
           
-(-main (rest *command-line-args*))
+(-main *command-line-args*)
