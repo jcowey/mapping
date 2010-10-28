@@ -76,7 +76,7 @@
 (defn -main
   [args]
     (def dirs (file-seq (File. (first args))))
-    (def nthreads 20)
+    (def nthreads 10)
     (if (== 3 (count args))
       (dosync (ref-set param (.split (nth args 2) "="))))
     (init-templates (second args) param nthreads)

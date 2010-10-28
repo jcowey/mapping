@@ -41,6 +41,13 @@
       ?i dc:relation ?r2 .
       FILTER ( regex(str(?r1), \"^http://papyri.info/ddbdp\") || regex(str(?r1), \"^http://papyri.info/hgv\")) 
       FILTER  regex(str(?r2), \"^http://papyri.info/images\")}")
+  (def transitive-rels "prefix dc: <http://purl.org/dc/terms/>
+      construct{?s dc:relation ?o2}
+      from <rmi://localhost/papyri.info#pi>
+      where { ?s dc:relation ?o1 .
+              ?o1 dc:relation ?o2 
+              filter (!sameTerm(?s, ?o2))}")
+
   (let [factory (ConnectionFactory.)
         conn (.newConnection factory server)
         interpreter (SparqlInterpreter.)]
@@ -49,6 +56,7 @@
       (.execute (Insertion. graph, (.parseQuery interpreter relation)) conn)
       (.execute (Insertion. graph, (.parseQuery interpreter translations)) conn)
       (.execute (Insertion. graph, (.parseQuery interpreter images)) conn)
+      (.execute (Insertion. graph, (.parseQuery interpreter transitive-rels)) conn)
       (.close conn)))
       
 (-main (rest *command-line-args*))
