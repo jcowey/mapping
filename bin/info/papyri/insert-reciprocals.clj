@@ -47,7 +47,6 @@
       where { ?s dc:relation ?o1 .
               ?o1 dc:relation ?o2 
               filter (!sameTerm(?s, ?o2))}")
-
   (let [factory (ConnectionFactory.)
         conn (.newConnection factory server)
         interpreter (SparqlInterpreter.)]
