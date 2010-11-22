@@ -3004,7 +3004,7 @@
 <http://hudd.huji.ac.il/glrt.aspx?item_id=674875379> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/sb;1;4664/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=675051284> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/cpr;1;162/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=675241573> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.wisc;2;52/source> .
-<http://hudd.huji.ac.il/glrt.aspx?item_id=675288988> <http://purl.org/dc/terms/references> p.bodl;1;MS. <http://purl.org/dc/terms/references> Gr. <http://purl.org/dc/terms/references> class. <http://purl.org/dc/terms/references> c. <http://purl.org/dc/terms/references> 128 <http://purl.org/dc/terms/references> (P) <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/a/source> .
+<http://hudd.huji.ac.il/glrt.aspx?item_id=675288988> <http://purl.org/dc/terms/references> <http://papyri.info/hgv/10270/source> . 
 <http://hudd.huji.ac.il/glrt.aspx?item_id=675332093> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/cpr;7;46/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=660356064> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/cpr;19;39/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=675768875> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.hamb;1;21/source> .
@@ -3125,7 +3125,7 @@
 <http://hudd.huji.ac.il/glrt.aspx?item_id=696440559> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.graux;2;21/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=696730280> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/stud.pal;3;335/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=696785139> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.mil.vogl;2;104/source> .
-<http://hudd.huji.ac.il/glrt.aspx?item_id=696847336> <http://purl.org/dc/terms/references> p.bodl;1;MS. <http://purl.org/dc/terms/references> Gr. <http://purl.org/dc/terms/references> class. <http://purl.org/dc/terms/references> c. <http://purl.org/dc/terms/references> 128 <http://purl.org/dc/terms/references> (P) <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/d/source> .
+<http://hudd.huji.ac.il/glrt.aspx?item_id=696847336> <http://purl.org/dc/terms/references> <http://papyri.info/hgv/22608/source> . 
 <http://hudd.huji.ac.il/glrt.aspx?item_id=697021758> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.prag;2;166/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=697209739> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.grenf;1;33/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=697544521> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.nag.hamm;;62/source> .
@@ -3426,7 +3426,7 @@
 <http://hudd.huji.ac.il/glrt.aspx?item_id=761091023> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.petr.2;;2/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=155532422> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.mil.vogl;2;99/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=762052677> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/sb;1;4322/source> .
-<http://hudd.huji.ac.il/glrt.aspx?item_id=762167073> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/qd"/source> .
+<http://hudd.huji.ac.il/glrt.aspx?item_id=762167073> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/chr.mitt;;181rp,qd/source> . 
 <http://hudd.huji.ac.il/glrt.aspx?item_id=763120702> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.fay;;236/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=763250598> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.oxy;8;1130/source> .
 <http://hudd.huji.ac.il/glrt.aspx?item_id=763286213> <http://purl.org/dc/terms/references> <http://papyri.info/ddbdp/p.mil.vogl;2;107/source> .
