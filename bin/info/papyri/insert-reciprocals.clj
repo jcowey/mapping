@@ -26,14 +26,14 @@
 				(str "prefix dc: <http://purl.org/dc/terms/> "
 				     "construct{?s dc:hasPart <" url ">} "
 				     "from <rmi://localhost/papyri.info#pi> "
-				     "where { <" url "> dc:isPartOf ?s}")) conn))
+				     "where { <" url "> dc:isPartOf ?s}"))) conn)
       (.execute
        (Insertion. graph,
 		   (.parseQuery interpreter
 				(str "prefix dc: <http://purl.org/dc/terms/> "
 				     "construct{?s dc:relation <" url ">} "
 				     "from <rmi://localhost/papyri.info#pi> "
-				     "where { <" url "> dc:relation ?s}")) conn))
+				     "where { <" url "> dc:relation ?s}"))) conn)
       (.execute
        (Insertion. graph,
 		   (.parseQuery interpreter
@@ -42,7 +42,7 @@
 				     "from <rmi://localhost/papyri.info#pi> "
 				     "where { <" url "> dc:relation ?o1 . "
 				     "?o1 dc:relation ?o2 "
-				     "filter (!sameTerm(<" url ">, ?o2))}")) conn))
+				     "filter (!sameTerm(<" url ">, ?o2))}"))) conn)
       (.close conn))
     (let [factory (ConnectionFactory.)
 	  conn (.newConnection factory server)
@@ -86,6 +86,6 @@
       (.execute (Insertion. graph, (.parseQuery interpreter translations)) conn)
       (.execute (Insertion. graph, (.parseQuery interpreter images)) conn)
       (.execute (Insertion. graph, (.parseQuery interpreter transitive-rels)) conn)
-      (.close conn)))
+      (.close conn))))
       
 (-main (rest *command-line-args*))
