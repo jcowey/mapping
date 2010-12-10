@@ -6,7 +6,8 @@
            (java.net URI)
            (org.mulgara.connection Connection ConnectionFactory)
            (org.mulgara.query.operation CreateGraph Insertion)
-           (org.mulgara.sparql SparqlInterpreter)))
+           (org.mulgara.sparql SparqlInterpreter)
+	   (org.mulgara.itql TqlInterpreter)))
            
       
 (def server (URI/create "rmi://localhost/server1"))
