@@ -756,6 +756,9 @@
         <dcterms:identifier rdf:resource="Perseus:text:1999.05.0188"/>
         <dcterms:bibliographicCitation>P.Phil.</dcterms:bibliographicCitation>
     </rdf:Description>
+    <rdf:Description rdf:about="http://papyri.info/ddbdp/p.poethke">
+        <dcterms:bibliographicCitation>P.Poethke</dcterms:bibliographicCitation>
+    </rdf:Description>
     <rdf:Description rdf:about="http://papyri.info/ddbdp/p.prag">
         <dcterms:identifier rdf:resource="Perseus:text:1999.05.0189"/>
         <dcterms:bibliographicCitation>P.Prag.</dcterms:bibliographicCitation>
