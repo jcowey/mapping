@@ -16,7 +16,6 @@
         <rdf:Description rdf:about="{$id}">
             <dcterms:identifier>papyri.info/ddbdp/<xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'ddb-hybrid']/text()"/></dcterms:identifier>
             <dcterms:identifier><xsl:value-of select="//tei:publicationStmt/tei:idno[@type = 'filename']/text()"/></dcterms:identifier>
-            <dcterms:references rdf:resource="http://papyri.info/navigator/full/ddbdp_{substring-before($perseus-id, ';')}_{$ddb-seq[2]}:{replace(encode-for-uri($ddb-seq[3]), '%', '%25')}"/>
             <xsl:for-each select="distinct-values(//tei:text/tei:body/tei:head[@xml:lang='en']/tei:ref[@type='reprint-in']/@n)">
                 <xsl:for-each select="tokenize(., '\|')">
                 <xsl:variable name="ddb-reprint-seq" select="tokenize(., ';')"/>

@@ -4,7 +4,7 @@
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" exclude-result-prefixes="xs tei" version="2.0">
   <xsl:output omit-xml-declaration="yes"/>
-  <xsl:param name="DDB-root"/>
+  <xsl:param name="DDB-root">/data/papyri.info/idp.data/DDB_EpiDoc_XML</xsl:param>
 
   <xsl:template match="/tei:TEI">
     <xsl:variable name="id">http://papyri.info/apis/<xsl:value-of
@@ -35,6 +35,7 @@
                 select="concat($DDB-root, '/', $col, '/', $col, '.', $ddb-seq[2], '/', $col, '.', $ddb-seq[2], '.', $ddb-seq[3], '.xml')"
               />
             </xsl:when>
+            <xsl:otherwise>/</xsl:otherwise>
           </xsl:choose>
         </xsl:variable>
         <xsl:if test="doc-available($ddb-doc-uri)">
